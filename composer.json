@@ -1,0 +1,52 @@
+{
+    "name": "matt-allan/passport-socialite",
+    "description": "A socialite driver for Passport",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/matt-allan/passport-socialite",
+    "authors": [
+        {
+            "name": "Matt Allan",
+            "email": "matt@mattallan.me"
+        }
+    ],
+    "keywords": [
+        "laravel",
+        "passport",
+        "socialite",
+        "oauth2"
+    ],
+    "autoload": {
+        "psr-4": {
+            "MattAllan\\PassportSocialite\\": "src"
+        }
+    },
+    "require": {
+        "php": ">=7.1",
+        "illuminate/support": "5.7.x|5.8.x",
+        "laravel/socialite": "^4.1"
+    },
+    "require-dev": {
+        "matt-allan/laravel-code-style": "^0.3.0",
+        "orchestra/testbench": "^3.8",
+        "phpunit/phpunit": "^7.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "MattAllan\\PassportSocialite\\PassportSocialiteServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "php-cs-fixer fix --dry-run --diff",
+        "fix-style": "php-cs-fixer fix"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
