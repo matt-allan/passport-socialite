@@ -23,13 +23,13 @@
     },
     "require": {
         "php": ">=7.1",
-        "illuminate/support": "5.7.x|5.8.x",
+        "illuminate/support": "^5.7|^6.0",
         "laravel/socialite": "^4.1"
     },
     "require-dev": {
-        "matt-allan/laravel-code-style": "^0.3.0",
-        "orchestra/testbench": "^3.8",
-        "phpunit/phpunit": "^7.0"
+        "matt-allan/laravel-code-style": "^0.4.0",
+        "orchestra/testbench": "^3.8|^4.0",
+        "phpunit/phpunit": "^8.0"
     },
     "extra": {
         "branch-alias": {
