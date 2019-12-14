@@ -22,7 +22,7 @@ Before using this driver, you will need to add credentials for the Passport serv
     'client_id' => env('PASSPORT_CLIENT_ID'),
     'client_secret' => env('PASSPORT_CLIENT_SECRET'),
     'url' => env('PASSPORT_URL'),
-    'redirect' => 'http://your-callback-url',
+    'redirect' => env('PASSPORT_REDIRECT'),
 ],
 ``` 
 
