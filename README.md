@@ -67,6 +67,12 @@ class LoginController extends Controller
 
 The current user's details will be retrieved from the default `api/user` route.
 
+In addition to the standard Socialite methods a `refresh` method is available to easily refresh expired tokens. The `refresh` method accepts a refresh token and returns an updated `User` with new access and refresh tokens if the token is refreshed successfully.
+
+```php
+$user = Socialite::driver('passport')->refresh($refreshToken);
+```
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
