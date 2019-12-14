@@ -15,13 +15,11 @@ class PassportProvider extends AbstractProvider implements ProviderInterface
     protected $scopeSeparator = ' ';
 
     /**
-     * @param  User|string $refreshToken
+     * @param  string $refreshToken
      * @return User
      */
-    public function refresh($refreshToken): User
+    public function refresh(string $refreshToken): User
     {
-        $refreshToken = $refreshToken instanceof User ? $refreshToken->refreshToken : $refreshToken;
-
         $response = $this->getRefreshTokenResponse($refreshToken);
 
         $user = $this->mapUserToObject($this->getUserByToken(
