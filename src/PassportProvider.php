@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MattAllan\PassportSocialite;
 
 use Illuminate\Support\Arr;
+use GuzzleHttp\ClientInterface;
 use Laravel\Socialite\Two\User;
 use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\ProviderInterface;
@@ -12,6 +13,53 @@ use Laravel\Socialite\Two\ProviderInterface;
 class PassportProvider extends AbstractProvider implements ProviderInterface
 {
     protected $scopeSeparator = ' ';
+
+    /**
+     * @param  User|string $refreshToken
+     * @return User
+     */
+    public function refresh($refreshToken): User
+    {
+        $refreshToken = $refreshToken instanceof User ? $refreshToken->refreshToken : $refreshToken;
+
+        $response = $this->getRefreshTokenResponse($refreshToken);
+
+        $user = $this->mapUserToObject($this->getUserByToken(
+            $token = Arr::get($response, 'access_token')
+        ));
+
+        return $user->setToken($token)
+                    ->setRefreshToken(Arr::get($response, 'refresh_token'))
+                    ->setExpiresIn(Arr::get($response, 'expires_in'));
+    }
+
+    protected function getRefreshTokenResponse(string $refreshToken): array
+    {
+        $postKey = (version_compare(ClientInterface::VERSION, '6') === 1) ? 'form_params' : 'body';
+
+        $response = $this->getHttpClient()->post($this->getTokenUrl(), [
+            'headers' => ['Accept' => 'application/json'],
+            $postKey => $this->getRefreshTokenFields($refreshToken),
+        ]);
+
+        return json_decode((string) $response->getBody(), true);
+    }
+
+    /**
+     * Get the POST fields for the refresh token request.
+     *
+     * @param  string  $refreshToken
+     * @return array
+     */
+    protected function getRefreshTokenFields(string $refreshToken): array
+    {
+        return [
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+            'grant_type' => 'refresh_token',
+            'refresh_token' => $refreshToken,
+        ];
+    }
 
     /**
      * {@inheritdoc}

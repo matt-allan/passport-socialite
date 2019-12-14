@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
-use GuzzleHttp\Psr7\Response;
 use Orchestra\Testbench\TestCase;
 use GuzzleHttp\Handler\MockHandler;
 use Laravel\Socialite\Facades\Socialite;
+use GuzzleHttp\Psr7\Response as PsrResponse;
+use Illuminate\Foundation\Testing\TestResponse;
 use Laravel\Socialite\SocialiteServiceProvider;
 use MattAllan\PassportSocialite\PassportSocialiteServiceProvider;
 
@@ -80,29 +81,30 @@ class PassportProviderTest extends TestCase
 
         $user = json_decode($response->getContent(), true);
 
-        $this->assertArrayHasKey('id', $user);
-        $this->assertEquals(123, $user['id']);
+        $this->assertEquals([
+            'id' => 123,
+            'name' => 'Matt Allan',
+            'nickname' => 'matt@passport.test',
+            'email' => 'matt@passport.test',
+            'avatar' => null,
+            'token' => 'access',
+            'refreshToken' => 'refresh',
+            'expiresIn' => 999,
+            'user' => [
+                'id' => 123,
+                'name' => 'Matt Allan',
+                'email' => 'matt@passport.test',
+            ],
+        ], $user);
+    }
 
-        $this->assertArrayHasKey('name', $user);
-        $this->assertEquals('Matt Allan', $user['name']);
+    public function test_refresh()
+    {
+        $this->fakePassportResponse();
 
-        $this->assertArrayHasKey('nickname', $user);
-        $this->assertEquals('matt@passport.test', $user['nickname']);
+        $response = $this->call('GET', 'login/passport/refresh');
 
-        $this->assertArrayHasKey('email', $user);
-        $this->assertEquals('matt@passport.test', $user['email']);
-
-        $this->assertArrayHasKey('avatar', $user);
-        $this->assertEquals(null, $user['avatar']);
-
-        $this->assertArrayHasKey('token', $user);
-        $this->assertEquals('access', $user['token']);
-
-        $this->assertArrayHasKey('refreshToken', $user);
-        $this->assertEquals('refresh', $user['refreshToken']);
-
-        $this->assertArrayHasKey('expiresIn', $user);
-        $this->assertEquals(999, $user['expiresIn']);
+        $this->assertResponseContainsUser($response);
     }
 
     private function registerLoginRoutes()
@@ -114,18 +116,11 @@ class PassportProviderTest extends TestCase
         }]);
 
         $this->app['router']->get('login/passport/callback', ['middleware' => 'web', 'uses' => function () {
-            $user = Socialite::driver('passport')->user();
+            return json_encode(Socialite::driver('passport')->user());
+        }]);
 
-            return [
-                'id' => $user->id,
-                'nickname' => $user->nickname,
-                'name' => $user->name,
-                'email' => $user->email,
-                'avatar' => $user->avatar,
-                'token' => $user->token,
-                'refreshToken' => $user->refreshToken,
-                'expiresIn' => $user->expiresIn,
-            ];
+        $this->app['router']->get('login/passport/refresh', ['middleware' => 'web', 'uses' => function () {
+            return json_encode(Socialite::driver('passport')->refresh('abc123'));
         }]);
     }
 
@@ -135,13 +130,13 @@ class PassportProviderTest extends TestCase
         $this->app->rebinding('request', function () {
             Socialite::driver('passport')->setHttpClient(
                 new Client(['handler' => new MockHandler([
-                    new Response(200, [], json_encode([
+                    new PsrResponse(200, [], json_encode([
                         'token_type' => 'Bearer',
                         'expires_in' => 999,
                         'access_token' => 'access',
                         'refresh_token' => 'refresh',
                     ])),
-                    new Response(200, [], json_encode([
+                    new PsrResponse(200, [], json_encode([
                         'id' => 123,
                         'name' => 'Matt Allan',
                         'email' => 'matt@passport.test',
@@ -149,5 +144,26 @@ class PassportProviderTest extends TestCase
                 ])])
             );
         });
+    }
+
+    private function assertResponseContainsUser(TestResponse $response)
+    {
+        $user = json_decode($response->getContent(), true);
+
+        $this->assertEquals([
+            'id' => 123,
+            'name' => 'Matt Allan',
+            'nickname' => 'matt@passport.test',
+            'email' => 'matt@passport.test',
+            'avatar' => null,
+            'token' => 'access',
+            'refreshToken' => 'refresh',
+            'expiresIn' => 999,
+            'user' => [
+                'id' => 123,
+                'name' => 'Matt Allan',
+                'email' => 'matt@passport.test',
+            ],
+        ], $user);
     }
 }
