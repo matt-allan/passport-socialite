@@ -16,8 +16,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Security
 
+## 0.2.0
+
+### Added
+
+- Added a `refresh` method to support refreshing access tokens.
+
 ## 0.1.1
 
 ### Added
 
-Added support for Laravel 6
+- Added support for Laravel 6
