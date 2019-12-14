@@ -15,3 +15,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Removed
 
 ### Security
+
+## 0.1.1
+
+### Added
+
+Added support for Laravel 6
