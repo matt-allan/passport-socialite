@@ -24,7 +24,7 @@
     "require": {
         "php": ">=7.1",
         "illuminate/support": "5.7.x|5.8.x|^6.0|^7.0|^8.0",
-        "laravel/socialite": "^4.1"
+        "laravel/socialite": "^5.1"
     },
     "require-dev": {
         "matt-allan/laravel-code-style": "^0.4.0",
