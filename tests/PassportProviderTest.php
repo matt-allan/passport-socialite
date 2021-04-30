@@ -30,6 +30,8 @@ class PassportProviderTest extends TestCase
             'url' => 'passport.test',
             'redirect' => 'app.test/login/passport/callback',
         ]);
+
+        $app['config']->set('app.debug', true);
     }
 
     protected function setUp(): void

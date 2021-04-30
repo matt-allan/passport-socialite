@@ -33,11 +33,9 @@ class PassportProvider extends AbstractProvider implements ProviderInterface
 
     protected function getRefreshTokenResponse(string $refreshToken): array
     {
-        $postKey = (version_compare(ClientInterface::VERSION, '6') === 1) ? 'form_params' : 'body';
-
         $response = $this->getHttpClient()->post($this->getTokenUrl(), [
             'headers' => ['Accept' => 'application/json'],
-            $postKey => $this->getRefreshTokenFields($refreshToken),
+            'form_params' => $this->getRefreshTokenFields($refreshToken),
         ]);
 
         return json_decode((string) $response->getBody(), true);
