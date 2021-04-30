@@ -1,7 +1,6 @@
 ## Laravel Passport Socialite Driver
 [![Packagist License](https://poser.pugx.org/matt-allan/passport-socialite/license.png)](http://choosealicense.com/licenses/mit/)
 [![Latest Stable Version](https://poser.pugx.org/matt-allan/passport-socialite/version.png)](https://packagist.org/packages/matt-allan/passport-socialite)
-[![Build Status](https://travis-ci.com/matt-allan/passport-socialite.svg?branch=master)](https://travis-ci.com/matt-allan/passport-socialite)
 
 A [Laravel Socialite](https://laravel.com/docs/5.8/socialite) driver for authenticating with [Laravel Passport](https://laravel.com/docs/5.8/passport) OAuth servers.
 
