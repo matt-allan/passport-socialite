@@ -27,6 +27,7 @@
         "laravel/socialite": "^5.1"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.15.6",
         "matt-allan/laravel-code-style": "^0.6.0",
         "orchestra/testbench": "^3.8|^4.0",
         "phpunit/phpunit": "^8.0"
