@@ -22,12 +22,13 @@
         }
     },
     "require": {
-        "php": ">=7.1",
-        "illuminate/support": "5.7.x|5.8.x|^6.0|^7.0|^8.0",
+        "php": ">=7.3",
+        "illuminate/support": "^6.0|^7.0|^8.0",
         "laravel/socialite": "^5.1"
     },
     "require-dev": {
-        "matt-allan/laravel-code-style": "^0.4.0",
+        "friendsofphp/php-cs-fixer": "^2.15.6",
+        "matt-allan/laravel-code-style": "^0.6.0",
         "orchestra/testbench": "^3.8|^4.0",
         "phpunit/phpunit": "^8.0"
     },
