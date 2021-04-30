@@ -4,17 +4,16 @@ All notable changes will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## Unreleased
+## 0.4.0
 
 ### Added
 
-### Deprecated
-
-### Fixed
+- Added support for Laravel 8.0
 
 ### Removed
 
-### Security
+- Dropped support for PHP 7.1 and PHP 7.2
+- Dropped support for Laravel 5.7 and 5.8
 
 ## 0.3.0
 
