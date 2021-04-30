@@ -2,7 +2,7 @@
 [![Packagist License](https://poser.pugx.org/matt-allan/passport-socialite/license.png)](http://choosealicense.com/licenses/mit/)
 [![Latest Stable Version](https://poser.pugx.org/matt-allan/passport-socialite/version.png)](https://packagist.org/packages/matt-allan/passport-socialite)
 
-A [Laravel Socialite](https://laravel.com/docs/5.8/socialite) driver for authenticating with [Laravel Passport](https://laravel.com/docs/5.8/passport) OAuth servers.
+A [Laravel Socialite](https://laravel.com/docs/8.x/socialite) driver for authenticating with [Laravel Passport](https://laravel.com/docs/8.x/passport) OAuth servers.
 
 ## Installation
 
@@ -27,7 +27,7 @@ Before using this driver, you will need to add credentials for the Passport serv
 
 ## Usage
 
-The Passport driver works identically to the other Socialite drivers. All of the methods mentioned in the [official documentation](https://laravel.com/docs/5.8/socialite) are available.
+The Passport driver works identically to the other Socialite drivers. All of the methods mentioned in the [official documentation](https://laravel.com/docs/8.x/socialite) are available.
 
 You can access the passport driver using the `Socialite` facade:
 
