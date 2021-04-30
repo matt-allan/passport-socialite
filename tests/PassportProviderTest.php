@@ -3,14 +3,14 @@
 declare(strict_types=1);
 
 use GuzzleHttp\Client;
-use Illuminate\Support\Str;
-use Orchestra\Testbench\TestCase;
 use GuzzleHttp\Handler\MockHandler;
-use Laravel\Socialite\Facades\Socialite;
 use GuzzleHttp\Psr7\Response as PsrResponse;
 use Illuminate\Foundation\Testing\TestResponse;
+use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\SocialiteServiceProvider;
 use MattAllan\PassportSocialite\PassportSocialiteServiceProvider;
+use Orchestra\Testbench\TestCase;
 
 class PassportProviderTest extends TestCase
 {
