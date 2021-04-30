@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MattAllan\PassportSocialite;
 
 use Illuminate\Support\Arr;
-use GuzzleHttp\ClientInterface;
 use Laravel\Socialite\Two\User;
 use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\ProviderInterface;
